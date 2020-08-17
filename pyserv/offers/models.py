@@ -28,12 +28,29 @@ class CommercialOffer(models.Model):
         return f'{self.code}_{self.title}'
 
 
+class ObjectsForCustomer(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField(null=True, blank=True, verbose_name="Описание")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+    motors = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Моторы")
+    valves = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Клапана")
+
+    class Meta:
+        verbose_name = 'Объект'
+        verbose_name_plural = 'Объекты'
+
+    def __str__(self):
+        return self.title
+
+
 class ObjectBase(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
-    quantity = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Количество")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'Объект'
