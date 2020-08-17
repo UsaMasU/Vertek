@@ -1,22 +1,23 @@
 from django.db import models
-from departments.models import DepatrmentObjectCase
+from departments.models import DepartmentObjectCase
 
 OFFER_TYPE = (
     ('co', 'Commercial offer'),
-    ('bo', 'Bussines offer'),
+    ('bo', 'Business offer'),
 )
+
 
 class CommercialOffer(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название")
     code = models.CharField(max_length=30, verbose_name="Код предложения")
     type = models.CharField(max_length=30, choices=OFFER_TYPE, default='co')
-    project_hh = models.DecimalField(verbose_name="Часы на проектирование")
-    commisioning_hh = models.DecimalField(verbose_name="Часы на пусконаладку")
+    project_hh = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Часы на проектирование")
+    commissioning_hh = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Часы на пусконаладку")
     project_cost = models.FloatField(verbose_name="Стоимость проектирования")
-    commisioning_cost = models.FloatField(verbose_name="Стоимость пусконаладки")
+    commissioning_cost = models.FloatField(verbose_name="Стоимость пусконаладки")
     material_cost = models.FloatField(verbose_name="Стоимость материалов")
     total_cost = models.FloatField(verbose_name="Обащая стоимость")
-    object_case = models.ForeignKey('ObjectBase', verbose_name="Объект")
+    object_case = models.ForeignKey('ObjectBase', verbose_name="Объект", on_delete=models.CASCADE)
     slug = models.SlugField(max_length=50)
 
     class Meta:
@@ -30,7 +31,7 @@ class CommercialOffer(models.Model):
 class ObjectBase(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
-    quantity = models.DecimalField(verbose_name="Количество")
+    quantity = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Количество")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -46,9 +47,9 @@ class DepartmentOffer(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название")
     code = models.CharField(max_length=30, verbose_name="Код предложения")
     type = models.CharField(max_length=30, choices=OFFER_TYPE, default='co')
-    project_hh = models.DecimalField(verbose_name="Часы на проектирование")
-    commisioning_hh = models.DecimalField(verbose_name="Часы на пусконаладку")
-    object_case = models.ForeignKey(DepatrmentObjectCase, verbose_name="Объект")
+    project_hh = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Часы на проектирование")
+    commissioning_hh = models.DecimalField(decimal_places=0, max_digits=10, verbose_name="Часы на пусконаладку")
+    object_case = models.ForeignKey(DepartmentObjectCase, verbose_name="Объект", on_delete=models.CASCADE)
     slug = models.SlugField(max_length=50)
 
     class Meta:

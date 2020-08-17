@@ -32,7 +32,7 @@ class DepartmentPerson(models.Model):
         return self.name
 
 
-class DepatrmentObjectCase(models.Model):
+class DepartmentObjectCase(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
     coefficient = models.FloatField(verbose_name="Коэффициент")
