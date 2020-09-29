@@ -45,6 +45,7 @@ class CustomerPerson(models.Model):
 
 
 class CustomerRequest(models.Model):
+    income_code = models.CharField(max_length=50, verbose_name="Код", null=True)
     title = models.CharField(max_length=50, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
     folder = models.CharField(max_length=100, verbose_name="Папка")
