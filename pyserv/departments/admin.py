@@ -2,9 +2,9 @@ from django.contrib import admin
 from departments.models import DepartmentObjects, Department, DepartmentPerson, DepartmentObjectCase
 
 
-class DepartmentObjectsInline(admin.TabularInline):
-    model = DepartmentObjects
-    extra = 1
+# class DepartmentObjectsInline(admin.TabularInline):
+#     model = DepartmentObjects
+#     extra = 1
 
 
 @admin.register(Department)
