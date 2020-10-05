@@ -49,7 +49,7 @@ class DepartmentObjectCase(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
     coefficient = models.FloatField(verbose_name="Коэффициент")
-    # department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    #department = models.ForeignKey(Department, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)

@@ -22,9 +22,9 @@ class CustomerPersonAdmin(admin.ModelAdmin):
 
 @admin.register(CustomerRequest)
 class CustomerRequestAdmin(admin.ModelAdmin):
-    list_display = ('title', 'customer', 'person', 'created_at', 'folder')
+    list_display = ('income_code', 'title', 'customer', 'person', 'created_at', 'folder')
     list_filter = ('title', 'customer', 'person', 'created_at')
-    search_fields = ('title', 'customer')
-    prepopulated_fields = {'slug': ('title', 'created_at')}
+    search_fields = ('income_code', 'title', 'customer')
+    prepopulated_fields = {'slug': ('income_code',)}
     ordering = ('customer',)
 
