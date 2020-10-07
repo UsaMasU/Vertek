@@ -27,7 +27,8 @@ class DepartmentPersonAdmin(admin.ModelAdmin):
 
 @admin.register(DepartmentObjectCase)
 class DepartmentObjectCaseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active')
-    list_filter = ('title', 'is_active', 'created_at', 'updated_at')
-    search_fields = ('title',)
-    ordering = ('id',)
+    list_display = ('object_code', 'title', 'is_active')
+    list_filter = ('object_code', 'title', 'is_active', 'created_at', 'updated_at')
+    search_fields = ('object_code', 'title',)
+    prepopulated_fields = {'slug': ('object_code', 'title')}
+    ordering = ('object_code',)

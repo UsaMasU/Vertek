@@ -47,19 +47,21 @@ class DepartmentPerson(models.Model):
 
 class DepartmentObjectCase(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название")
+    object_code = models.CharField(max_length=50, verbose_name="Код обьекта", null=True, blank=True)
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
     coefficient = models.FloatField(verbose_name="Коэффициент")
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
 
     class Meta:
         verbose_name = 'Обьект'
         verbose_name_plural = 'Обьекты'
 
     def __str__(self):
-        return self.title
+        return f'{self.object_code}_{self.title}'
 
 
 class DepartmentObjects(models.Model):
