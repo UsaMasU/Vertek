@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from departments.models import DepartmentPerson
+
 
 class Customer(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название")
@@ -45,10 +47,11 @@ class CustomerPerson(models.Model):
 
 
 class CustomerRequest(models.Model):
-    income_code = models.CharField(max_length=50, verbose_name="Код", null=True)
-    title = models.CharField(max_length=50, verbose_name="Название")
+    income_code = models.CharField(verbose_name="Код", max_length=50, null=True)
+    title = models.CharField(verbose_name="Название", max_length=50)
     description = models.TextField(verbose_name="Описание")
-    folder = models.CharField(max_length=100, verbose_name="Папка")
+    manager = models.ForeignKey(DepartmentPerson, on_delete=models.SET_NULL, null=True, blank=True)
+    folder = models.CharField(verbose_name="Папка", max_length=100)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     person = models.ForeignKey(CustomerPerson, models.CASCADE)
     created_at = models.DateField(verbose_name="Дата создания", null=True)

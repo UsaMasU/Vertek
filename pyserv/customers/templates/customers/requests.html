@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+{% include './inc/_sidebar.html' with department=department %}
+{% endblock %}
+
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Запросы</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+            <tr class="table-info">
+                <th>Код</th>
+                <th>Название</th>
+                <th>ГИП</th>
+                <th>Заказчик</th>
+                <th>Контакт</th>
+                <th>Папка</th>
+                <th>Дата запроса</th>
+                <th>Срок исполнения</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td><a href="{{ item.get_absolute_url }}">{{ item.income_code }}</a></td>
+                <td><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></td>
+                <td><a href="{{ item.manager.get_absolute_url }}">{{ item.manager }}</a></td>
+                <td><a href="{{ item.customer.get_absolute_url }}">{{ item.customer }}</a></td>
+                <td><a href="{{ item.person.get_absolute_url }}">{{ item.person }}</a></td>
+                <td><a href="{% url 'folders' %}?folder={{item.folder}}">{{ item.folder }}</a></td>
+                <td>{{ item.created_at }}</td>
+                <td>{{ item.make_it_by }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+{% endblock %}
+</html>
