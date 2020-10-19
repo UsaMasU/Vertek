@@ -1,8 +1,8 @@
 from django.contrib import admin
+
+from departments.admin import DepObjectsInOfferInline
 from .models import CommercialOffer, ObjectCase, ObjectsInOffer, DepartmentOffer, DepartmentInCommercial
 
-
-# admin.site.register(CommercialOffer)
 
 class ObjectsInOfferInline(admin.TabularInline):
     model = ObjectsInOffer
@@ -29,8 +29,8 @@ class CommercialOfferAdmin(admin.ModelAdmin):
 
 @admin.register(ObjectCase)
 class ObjectCaseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active')
-    list_filter = ('title', 'is_active', 'created_at', 'updated_at')
+    list_display = ('title','object_code', 'description', 'created_at', 'is_active')
+    list_filter = ('title','is_active', 'created_at', 'updated_at')
     search_fields = ('title', )
     ordering = ('id',)
 
@@ -42,6 +42,7 @@ class DepartmentOfferAdmin(admin.ModelAdmin):
     search_fields = ('title', 'code')
     prepopulated_fields = {'slug': ('code', 'title')}
     ordering = ('code',)
+    inlines = (ObjectsInOfferInline, DepObjectsInOfferInline)
 
 
 

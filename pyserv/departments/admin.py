@@ -1,10 +1,16 @@
 from django.contrib import admin
 from departments.models import DepartmentObjects, Department, DepartmentPerson, DepartmentObjectCase
-
+from offers.models import DepObjectsInOffer
 
 # class DepartmentObjectsInline(admin.TabularInline):
 #     model = DepartmentObjects
 #     extra = 1
+
+
+
+class DepObjectsInOfferInline(admin.TabularInline):
+    model = DepObjectsInOffer
+    extra = 1
 
 
 @admin.register(Department)
